@@ -1,21 +1,32 @@
 package fr.uga.l3miage.library.data.domain;
 
+import jakarta.annotation.Generated;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Transient;
 
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import org.hibernate.annotations.ManyToAny;
+
+@Entity
 public class Book {
 
+    @Id
+    @GeneratedValue
     private Long id;
+
     private String title;
     private long isbn;
     private String publisher;
     private short year;
     private Language language;
 
-    @Transient
+    @ManyToMany(mappedBy = "books")
     private Set<Author> authors;
 
     public Long getId() {
