@@ -2,6 +2,11 @@ package fr.uga.l3miage.library.data.repo;
 
 import fr.uga.l3miage.library.data.domain.Book;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -40,7 +45,9 @@ public class BookRepository implements CRUDRepository<Long, Book> {
      */
     public List<Book> all() {
         // TODO créer les named query
-        return entityManager.createNamedQuery("all-books", Book.class).getResultList();
+        Query res1 =entityManager.createNamedQuery("all-books", Book.class);
+        List <Book> res = res1.getResultList();
+        return res;
     }
 
     /**
@@ -50,9 +57,11 @@ public class BookRepository implements CRUDRepository<Long, Book> {
      */
     public List<Book> findByContainingTitle(String titlePart) {
         // TODO créer les named query
-        return entityManager.createNamedQuery("find-books-by-title", Book.class)
+        List<Book> res =  entityManager.createNamedQuery("find-books-by-title", Book.class)
                 // TODO completer l'appel pour utiliser le paramètre de cette méthode
+                .setParameter("title","%" + titlePart + "%")
                 .getResultList();
+            return res;
     }
 
     /**
@@ -63,9 +72,13 @@ public class BookRepository implements CRUDRepository<Long, Book> {
      */
     public List<Book> findByAuthorIdAndContainingTitle(Long authorId, String titlePart) {
         // TODO créer les named query
-        return entityManager.createNamedQuery("find-books-by-author-and-title", Book.class)
+        String search = "%" + titlePart + "%";
+        final List<Book> res =entityManager.createNamedQuery("find-books-by-author-and-title", Book.class)
                 // TODO completer l'appel pour utiliser les paramètres de cette méthode
+                .setParameter(1,authorId)
+                .setParameter("name",search)
                 .getResultList();
+                return res;
     }
 
     /**

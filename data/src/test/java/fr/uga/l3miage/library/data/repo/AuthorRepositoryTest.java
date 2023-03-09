@@ -52,7 +52,6 @@ class AuthorRepositoryTest extends Base {
         b2.addAuthor(a3);
         entityManager.persist(b1);
         entityManager.persist(b2);
-
         assertThat(authorRepository.checkAuthorByIdHavingCoAuthoredBooks(a1.getId())).isFalse();
         assertThat(authorRepository.checkAuthorByIdHavingCoAuthoredBooks(a2.getId())).isTrue();
 

@@ -5,20 +5,23 @@ import java.util.Objects;
 import java.util.Set;
 
 import jakarta.annotation.Generated;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.NamedQuery;
 
 
 @Entity
+@NamedQuery(name = "all-authors", query = "SELECT a FROM Author a ORDER BY a.fullName ASC")
 public class Author {
-
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(nullable = false)
     private String fullName;
-
     @ManyToMany
     private Set<Book> books;
 
