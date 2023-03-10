@@ -18,7 +18,9 @@ import java.util.Set;
 @NamedQueries({
     @NamedQuery(name = "all-books", query = "select b from Book b order by b.title ASC"),
     @NamedQuery(name = "find-books-by-title",query = "select b from Book b where lower(b.title) LIKE lower(:title)"),
-   // @NamedQuery(name = "find-books-by-author-and-title", query = "select a from Author a join Book b where a.id=?1 and b.title LIKE lower(:name)")
+    @NamedQuery(name = "find-books-by-author-and-title", query = "select b from Book b join b.authors a where a.id =?1 and lower(b.title) LIKE lower(:name)"),
+    @NamedQuery(name="find-books-by-authors-name",query="select b from Book b join b.authors a where lower(a.fullName) like (:name)"),
+    @NamedQuery(name="find-books-by-several-authors",query="select b from Book b join b.authors a group by b having count(a) > :name")
 })
 
 public class Book {
