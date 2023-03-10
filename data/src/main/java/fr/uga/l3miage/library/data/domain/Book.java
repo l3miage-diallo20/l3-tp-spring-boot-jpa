@@ -1,6 +1,5 @@
 package fr.uga.l3miage.library.data.domain;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,26 +8,24 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
-import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
-import jakarta.persistence.UniqueConstraint;
 
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import org.hibernate.annotations.ManyToAny;
+
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "all-books", query = "select b FROM Book b ORDER BY b.authors ASC"),
-    @NamedQuery(name = "find-books-by-title",query = "select b from Book b where b.title LIKE :title"),
-    @NamedQuery(name = "find-books-by-author-and-title", query = "select b from Book join b.authors a where a=?1 and b.title LIKE :name")
+    @NamedQuery(name = "all-books", query = "select b from Book b order by b.title ASC"),
+    @NamedQuery(name = "find-books-by-title",query = "select b from Book b where lower(b.title) LIKE lower(:title)"),
+   // @NamedQuery(name = "find-books-by-author-and-title", query = "select a from Author a join Book b where a.id=?1 and b.title LIKE lower(:name)")
 })
+
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(nullable = false)
+    @Column(unique=true,nullable = false)
     private String title;
     @Column(nullable = false)
     private long isbn;

@@ -24,7 +24,6 @@ public class Author {
     private String fullName;
     @ManyToMany
     private Set<Book> books;
-
     public Long getId() {
         return id;
     }
