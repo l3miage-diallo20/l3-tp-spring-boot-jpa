@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @DiscriminatorValue("L")
-@Table(name="librarian")
+@Table(name="Librarian")
 public class Librarian extends Person {
     @OneToOne
     private Librarian manager;

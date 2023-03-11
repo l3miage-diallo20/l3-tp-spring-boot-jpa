@@ -33,7 +33,7 @@ public abstract class Person {
     @Column(nullable = false)
     private String lastName;
     private Date birth;
-
+    
     public enum Gender {
         FEMALE, MALE, FLUID
     }
