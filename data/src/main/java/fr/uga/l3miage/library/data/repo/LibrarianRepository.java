@@ -44,6 +44,12 @@ public class LibrarianRepository implements CRUDRepository<String, Librarian> {
      */
     public List<Librarian> top3WorkingLibrarians() {
         // TODO
+        /*
+         String sql = "SELECT p having COUNT(p) from Librarian p GROUP BY p ORDER BY COUNT(p) desc";
+        List <Librarian> res = entityManager.createQuery("sql", Librarian.class)
+        .setMaxResults(3)
+        .getResultList();
+         */
         return null;
     }
 

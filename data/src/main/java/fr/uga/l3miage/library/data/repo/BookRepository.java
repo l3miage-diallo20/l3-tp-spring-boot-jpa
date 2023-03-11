@@ -105,7 +105,7 @@ public class BookRepository implements CRUDRepository<Long, Book> {
         // TODO créer les named query
         List <Book> res = entityManager.createNamedQuery("find-books-by-several-authors", Book.class)
                 // TODO completer l'appel pour utiliser le paramètre de cette méthode
-                .setParameter("name",count)
+                .setParameter(1,count)
                 .getResultList();
                 return res;
     }
